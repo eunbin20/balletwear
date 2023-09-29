@@ -30,6 +30,10 @@
   animation: animateIn 0.3s ease 0.15s both;
 }
 
+.active-tab {
+  border-bottom: 0.125rem solid white;
+}
+
 @keyframes animateIn {
   from {
     opacity: 0;
