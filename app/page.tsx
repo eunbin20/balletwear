@@ -1,44 +1,102 @@
-import { supabaseClient } from "@/lib/client";
+"use client";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import Image from "next/image";
+import { useState } from "react";
 
-// export const dynamic = "force-dynamic";
+const leotardList = [
+  "Alex",
+  "AlexMesh",
+  "Alicia",
+  "AliciaMesh",
+  "Anna",
+  "Becky",
+  "BeckyMesh",
+  "Camila",
+  "Charlotte",
+  "CharlotteMesh",
+  "Cora",
+  "CynthiaMesh",
+  "Daniela",
+  "Daria",
+  "Denise",
+  "Didi",
+  "Elise",
+  "Elli",
+  "ElliMesh",
+  "Erica",
+  "FionaMesh",
+  "Gina",
+  "GinaMesh",
+  "Heather",
+];
 
-export default async function Index() {
-  let { data: product, error } = await supabaseClient
-    .from("product")
-    .select("*");
-  console.log(
-    "product",
-    product?.map((item) => {
-      return item.introImageFile;
-    })
-  );
+export default function Index() {
+  const [leotard, setLeotard] = useState("");
+  const [trimColor, setTrimColor] = useState("");
+  const [fabricType, setFabricType] = useState("");
+  const [fabricColor, setFabricColor] = useState("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setLeotard(event.target.value as string);
+  };
 
   return (
-    <div className="max-w-[37.5rem] flex flex-col items-center">
-      <form action="/crawling/product-list" method="get">
-        <ul className="max-w-[70em] overflow-hidden mx-auto my-0 p-[0.5em]"></ul>
-        {product?.map((item) => {
-          return (
-            <li className="w-6/12 float-left p-[0.5em] lg:w-[33.33333333%]">
-              <a className="overflow-hidden w-auto p-0">
-                <div className="align-middle pr-[1em] block w-auto p-0">
-                  <Image
-                    className="block w-full h-auto"
-                    src={`https://${item.introImageFile}`}
-                    alt="Image Alt Text"
-                    width={"400"}
-                    height={"400"}
-                  />
-                </div>
-                <div className="align-middle w-3/5 p-0 px-0 py-[0.5em] text-foreground text-xs">
-                  <h4 className="m-0">{item.name}</h4>
-                  <p className="m-0">{item.price}</p>
-                </div>
-              </a>
-            </li>
-          );
-        })}
+    <div className="w-[800px]">
+      <form className="flex ">
+        <FormControl fullWidth>
+          <InputLabel id="leotard-select-label">레오타드 타입</InputLabel>
+          <Select
+            labelId="leotard-select-label"
+            id="leotard-select-label"
+            value={leotard}
+            label="Style"
+            onChange={handleChange}
+          >
+            {leotardList.map((leotard) => (
+              <MenuItem value={leotard} key={leotard}>
+                {leotard}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl fullWidth>
+          <InputLabel id="leotard-select-label">트림 색상</InputLabel>
+          <Select
+            labelId="leotard-select-label"
+            id="leotard-select-label"
+            value={leotard}
+            label="Style"
+            onChange={handleChange}
+          >
+            {leotardList.map((leotard) => (
+              <MenuItem value={leotard} key={leotard}>
+                {leotard}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl fullWidth>
+          <InputLabel id="leotard-select-label">몸판 색상</InputLabel>
+          <Select
+            labelId="leotard-select-label"
+            id="leotard-select-label"
+            value={leotard}
+            label="Style"
+            onChange={handleChange}
+          >
+            {leotardList.map((leotard) => (
+              <MenuItem value={leotard} key={leotard}>
+                {leotard}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </form>
     </div>
   );

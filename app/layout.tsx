@@ -16,10 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className="min-h-screen bg-background flex flex-col items-center w-full">
-        <Suspense>
-          <NavBarWrapper />
-        </Suspense>
+      <body className="min-h-screen flex flex-col items-center w-full">
         {children}
         <Analytics />
       </body>
