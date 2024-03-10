@@ -32,15 +32,6 @@ const NavBar: React.FunctionComponent<INavBarProps> = async ({ user }) => {
       </div>
       <div className="w-full max-w-4xl flex gap-8 items-center p-3 pb-0 text-sm text-foreground font-['Playfair leading-[normal] font-bold ">
         <div
-          className={`flex-shrink-0 w-6 h-8 text-center ${
-            pathname === "/" ? "active-tab" : ""
-          }`}
-        >
-          <Link href="/" className="w-3 text-white font-bold m-auto">
-            홈
-          </Link>
-        </div>
-        <div
           className={`flex-shrink-0 w-13 h-8 text-center ${
             pathname === "/shop" ? "active-tab" : ""
           }`}
