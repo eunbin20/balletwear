@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 const axios = require("axios");
 const cheerio = require("cheerio");
@@ -10,11 +11,11 @@ const chrome = require("selenium-webdriver/chrome");
 
 // GET http://localhost:3000/crawling/leotards
 // 유미코 커스텀 오더 페이지의 html 파일을 가져온다.
-export async function GET(request: Request) {
+export async function GET(req: NextApiRequest, res: NextApiResponse<any>) {
   const leotards = await getLeotardList();
   const colors = await getColorList();
 
-  return NextResponse.json({ leotards, color: colors });
+  return res.status(200).json({ leotards, color: colors });
 }
 
 const getColorList = async () => {
@@ -72,6 +73,7 @@ const getColorList = async () => {
 
       result[fabricHeading] = fabrics;
     }
+
     return result;
   } catch (error) {
     console.log(error);

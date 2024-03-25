@@ -13,6 +13,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "bonanza-ballet.com",
       },
+      {
+        protocol: "https",
+        hostname: "mto.yumiko.com",
+      },
     ],
   },
 };
