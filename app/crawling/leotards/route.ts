@@ -9,16 +9,26 @@ export const dynamic = "force-dynamic";
 const { Builder, By } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 
+interface Color {
+  title: string;
+  swatch: string;
+}
+
+interface FabricType {
+  fabricType: string;
+  colors: Color[];
+}
+
 // GET http://localhost:3000/crawling/leotards
 // 유미코 커스텀 오더 페이지의 html 파일을 가져온다.
 export async function GET(req: NextApiRequest, res: NextApiResponse<any>) {
   const leotards = await getLeotardList();
-  const colors = await getColorList();
+  const colors = await getColorList(leotards);
 
-  return res.status(200).json({ leotards, color: colors });
+  return NextResponse.json({ leotards, colors });
 }
 
-const getColorList = async () => {
+const getColorList = async (leotards: string[]) => {
   // headless로 크롬 드라이버 실행
   const driver = await new Builder()
     .forBrowser("chrome")
@@ -46,16 +56,11 @@ const getColorList = async () => {
     const fabricContainers = await driver.findElements(
       By.className("fabric-container")
     );
-    const result: {
-      [key: string]: {
-        name: string;
-        sampleImage: string;
-      }[];
-    } = {};
+    const result: FabricType[] = [];
 
     for (let i = 0; i < fabricHeadings.length; i++) {
-      const fabricHeading = await fabricHeadings[i].getText();
-      const fabrics = [];
+      const category = await fabricHeadings[i].getText();
+      const colors: Color[] = [];
 
       for (let i = 0; i < fabricContainers.length; i++) {
         const fabricName = await fabricContainers[i]
@@ -65,13 +70,16 @@ const getColorList = async () => {
           .findElement(By.tagName("img"))
           .getAttribute("src");
 
-        fabrics.push({
-          name: fabricName,
-          sampleImage: fabricImage,
+        colors.push({
+          title: fabricName,
+          swatch: fabricImage,
         });
       }
 
-      result[fabricHeading] = fabrics;
+      result.push({
+        fabricType: category,
+        colors: colors,
+      });
     }
 
     return result;

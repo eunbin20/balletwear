@@ -6,37 +6,41 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
+import colors from "../public/colors.json";
+import leotards from "../public/leotards.json";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-
-interface IData {
-  leotards: string[];
-  color: {
-    [key: string]: { name: string; sampleImage: string }[];
-  };
-}
-
-// prettier-ignore
-const data:IData = {"leotards":["Alex","AlexMesh","Alicia","AliciaMesh","Anna","Becky","BeckyMesh","Camila","Charlotte","CharlotteMesh","Cora","CynthiaMesh","Daniela","Daria","Denise","Didi","Elise","Elli","ElliMesh","Erica","FionaMesh","Gina","GinaMesh","Heather"],"color":{"Mesh":[{"name":"N-Mesh Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/mesh-black.jpg"},{"name":"N-Admiral","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/n-admiral.jpg"},{"name":"M-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/c-black.jpg"},{"name":"CV-Angelic","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/v-angelic.jpg"},{"name":"V-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/r-black.jpg"},{"name":"T-Angora","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/t-angora.jpg"},{"name":"G-Antique","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/g-antique.jpg"}],"Nylons":[{"name":"N-Mesh Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/mesh-black.jpg"},{"name":"N-Admiral","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/n-admiral.jpg"},{"name":"M-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/c-black.jpg"},{"name":"CV-Angelic","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/v-angelic.jpg"},{"name":"V-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/r-black.jpg"},{"name":"T-Angora","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/t-angora.jpg"},{"name":"G-Antique","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/g-antique.jpg"}],"Microfibers":[{"name":"N-Mesh Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/mesh-black.jpg"},{"name":"N-Admiral","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/n-admiral.jpg"},{"name":"M-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/c-black.jpg"},{"name":"CV-Angelic","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/v-angelic.jpg"},{"name":"V-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/r-black.jpg"},{"name":"T-Angora","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/t-angora.jpg"},{"name":"G-Antique","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/g-antique.jpg"}],"Original Crushed Velvets":[{"name":"N-Mesh Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/mesh-black.jpg"},{"name":"N-Admiral","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/n-admiral.jpg"},{"name":"M-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/c-black.jpg"},{"name":"CV-Angelic","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/v-angelic.jpg"},{"name":"V-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/r-black.jpg"},{"name":"T-Angora","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/t-angora.jpg"},{"name":"G-Antique","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/g-antique.jpg"}],"New Grace Velvets":[{"name":"N-Mesh Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/mesh-black.jpg"},{"name":"N-Admiral","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/n-admiral.jpg"},{"name":"M-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/c-black.jpg"},{"name":"CV-Angelic","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/v-angelic.jpg"},{"name":"V-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/r-black.jpg"},{"name":"T-Angora","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/t-angora.jpg"},{"name":"G-Antique","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/g-antique.jpg"}],"Techni":[{"name":"N-Mesh Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/mesh-black.jpg"},{"name":"N-Admiral","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/n-admiral.jpg"},{"name":"M-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/c-black.jpg"},{"name":"CV-Angelic","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/v-angelic.jpg"},{"name":"V-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/r-black.jpg"},{"name":"T-Angora","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/t-angora.jpg"},{"name":"G-Antique","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/g-antique.jpg"}],"Georgettes":[{"name":"N-Mesh Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/mesh-black.jpg"},{"name":"N-Admiral","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/n-admiral.jpg"},{"name":"M-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/c-black.jpg"},{"name":"CV-Angelic","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/v-angelic.jpg"},{"name":"V-Black","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/r-black.jpg"},{"name":"T-Angora","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/t-angora.jpg"},{"name":"G-Antique","sampleImage":"https://mto.yumiko.com/media/assets/colorchart/g-antique.jpg"}]}}
+import { useState } from "react";
 
 export default function Index() {
   const [leotard, setLeotard] = useState("");
   const [trimColor, setTrimColor] = useState("");
+  const [leotardColor, setLeotardColor] = useState("");
   const [fabricType, setFabricType] = useState("");
-  const [fabricColor, setFabricColor] = useState("");
+  const [currentColorList, setCurrentColorList] = useState<
+    { title: string; swatch: string }[]
+  >([]);
 
   const handleLeotardTypeChange = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
     setLeotard(event.target.value as string);
   };
 
+  const handleFabricTypeColorChange = (event: SelectChangeEvent) => {
+    const currentValue = event.target.value;
+    setFabricType(currentValue as string);
+    setCurrentColorList(
+      colors.filter((item) => item.fabricType === currentValue)[0].colors
+    );
+  };
+
   const handleTrimColorChange = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
     setTrimColor(event.target.value as string);
+  };
+  const handleLeotardColorChange = (event: SelectChangeEvent) => {
+    setLeotardColor(event.target.value as string);
   };
 
   return (
-    <div className="w-[800px]">
+    <div className="w-[800px] p-4">
       <form className="flex ">
         <FormControl fullWidth>
           <InputLabel id="leotard-select-label">레오타드 타입</InputLabel>
@@ -47,7 +51,7 @@ export default function Index() {
             label="Style"
             onChange={handleLeotardTypeChange}
           >
-            {data?.leotards.map((leotard) => (
+            {leotards.map((leotard) => (
               <MenuItem value={leotard} key={leotard}>
                 <div>{leotard}</div>
               </MenuItem>
@@ -55,52 +59,59 @@ export default function Index() {
           </Select>
         </FormControl>
         <FormControl fullWidth>
-          <InputLabel id="leotard-select-label">트림 색상</InputLabel>
+          <InputLabel id="fabric-select-label">재질</InputLabel>
           <Select
-            labelId="leotard-select-label"
-            id="leotard-select-label"
+            labelId="fabric-select-label"
+            id="fabric-select-label"
+            value={fabricType}
+            label="Style"
+            onChange={handleFabricTypeColorChange}
+          >
+            {colors.map((item) => (
+              <MenuItem value={item.fabricType} key={item.fabricType}>
+                <div>{item.fabricType}</div>
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl fullWidth>
+          <InputLabel id="leotard-color-select-label">몸판 색상</InputLabel>
+          <Select
+            labelId="leotard-color-select-label"
+            id="leotard-color-select-label"
+            value={leotardColor}
+            label="Style"
+            onChange={handleLeotardColorChange}
+          >
+            {currentColorList.map((color) => (
+              <MenuItem value={color.title} key={color.title + "leotard"}>
+                <div>
+                  <Image src={color.swatch} alt="" width={20} height={20} />
+                  {color.title}
+                </div>
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl fullWidth>
+          <InputLabel id="trim-color-select-label">트림 색상</InputLabel>
+          <Select
+            labelId="trim-color-select-label"
+            id="trim-color-select-label"
             value={trimColor}
             label="Style"
             onChange={handleTrimColorChange}
           >
-            {Object.keys(data.color).map((colorItem) => (
-              <span>
-                {colorItem}
-                {data.color[colorItem].map((color) => {
-                  return (
-                    <MenuItem value={color.name} key={color.name}>
-                      <div>
-                        <Image
-                          src={color.sampleImage}
-                          alt=""
-                          width={20}
-                          height={20}
-                        />
-                        {color.name}
-                      </div>
-                    </MenuItem>
-                  );
-                })}
-              </span>
-            ))}
-          </Select>
-        </FormControl>
-        {/* <FormControl fullWidth>
-          <InputLabel id="leotard-select-label">몸판 색상</InputLabel>
-          <Select
-            labelId="leotard-select-label"
-            id="leotard-select-label"
-            value={leotard}
-            label="Style"
-            onChange={handleChange}
-          >
-            {leotardList.map((leotard) => (
-              <MenuItem value={leotard} key={leotard}>
-                {leotard}
+            {currentColorList.map((color) => (
+              <MenuItem value={color.title} key={color.title + "trim"}>
+                <div>
+                  <Image src={color.swatch} alt="" width={20} height={20} />
+                  {color.title}
+                </div>
               </MenuItem>
             ))}
           </Select>
-        </FormControl> */}
+        </FormControl>
       </form>
     </div>
   );
