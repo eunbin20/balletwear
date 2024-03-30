@@ -16,7 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className="min-h-screen flex flex-col items-center w-full">
+      <body
+        className="min-h-screen flex flex-col items-center w-full"
+        suppressHydrationWarning={true}
+      >
         {children}
         <Analytics />
       </body>
