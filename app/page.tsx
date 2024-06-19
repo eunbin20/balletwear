@@ -9,9 +9,9 @@ import {
 import colors from "../public/colors.json";
 import leotards from "../public/leotards.json";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import ImageComponent from "@/components/ImageComponent";
-import ImageComponent2 from "@/components/ImageComponent2";
+import {  useState } from "react";
+import PreviewImage from "@/components/PreviewImage";
+
 
 export default function Index() {
   const [leotard, setLeotard] = useState("");
@@ -43,7 +43,7 @@ export default function Index() {
 
   return (
     <div className="w-[800px] p-4 flex flex-col">
-      <form className="flex ">
+      <form className="flex gap-1">
         <FormControl fullWidth>
           <InputLabel id="leotard-select-label">레오타드 타입</InputLabel>
           <Select
@@ -115,25 +115,10 @@ export default function Index() {
           </Select>
         </FormControl>
       </form>
-      <ImageComponent
+      <PreviewImage
         leotardType=""
-        leotardSwatchUrl={
-          currentColorList.filter((item) => item.title === leotardColor)[0]
-            ?.swatch
-        }
-        trimSwatchUrl={
-          currentColorList.filter((item) => item.title === trimColor)[0]?.swatch
-        }
-      />
-      <ImageComponent2
-        leotardType=""
-        leotardSwatchUrl={
-          currentColorList.filter((item) => item.title === leotardColor)[0]
-            ?.swatch
-        }
-        trimSwatchUrl={
-          currentColorList.filter((item) => item.title === trimColor)[0]?.swatch
-        }
+        leotardSwatchUrl="Mesh_Tone6.jpeg"
+        trimSwatchUrl="Mesh-Blush.jpeg"
       />
     </div>
   );

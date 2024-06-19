@@ -3,13 +3,11 @@ import { useEffect, useState } from "react";
 interface IImageComponent {
   leotardType: string;
   leotardSwatchUrl: string;
-  trimSwatchUrl: string;
 }
 
-function ImageComponent({
+function LeotardBodyImage({
   leotardType,
   leotardSwatchUrl,
-  trimSwatchUrl,
 }: IImageComponent) {
   const [filledImage, setFilledImage] = useState("");
 
@@ -24,7 +22,7 @@ function ImageComponent({
 
       // Load pattern image B
       const patternImage = new Image();
-      patternImage.src = "Mesh_Tone6.jpeg";
+      patternImage.src = leotardSwatchUrl;
       await new Promise((resolve) => {
         patternImage.onload = resolve;
       });
@@ -78,10 +76,9 @@ function ImageComponent({
 
   return (
     <div>
-      이미지
       {filledImage && <img src={filledImage} alt="Filled Image" />}
     </div>
   );
 }
 
-export default ImageComponent;
+export default LeotardBodyImage;

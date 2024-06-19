@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 
 interface IImageComponent {
   leotardType: string;
-  leotardSwatchUrl: string;
   trimSwatchUrl: string;
 }
 
-function ImageComponent2({
+function LeotardTrimImage({
   leotardType,
-  leotardSwatchUrl,
   trimSwatchUrl,
 }: IImageComponent) {
   const [filledImage, setFilledImage] = useState("");
@@ -24,7 +22,7 @@ function ImageComponent2({
 
       // Load pattern image B
       const patternImage = new Image();
-      patternImage.src = "Mesh-Blush.jpeg";
+      patternImage.src = trimSwatchUrl;
       await new Promise((resolve) => {
         patternImage.onload = resolve;
       });
@@ -78,15 +76,14 @@ function ImageComponent2({
 
   return (
     <div
-      className="top-[72px] absolute "
+      className="absolute"
       style={{
         top: "72px",
       }}
     >
-      이미지
       {filledImage && <img src={filledImage} alt="Filled Image" />}
     </div>
   );
 }
 
-export default ImageComponent2;
+export default LeotardTrimImage;
