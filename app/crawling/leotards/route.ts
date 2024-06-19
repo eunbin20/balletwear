@@ -36,7 +36,7 @@ const getColorList = async (leotards: string[]) => {
       new chrome.Options().windowSize({ width: 1920, height: 1080 })
     )
     .setChromeService(
-      new chrome.ServiceBuilder("/Users/eunbin.kim/Downloads/chromedriver")
+      new chrome.ServiceBuilder("/Users/eunbin/Downloads/chromedriver")
     )
     .build();
 
@@ -44,27 +44,25 @@ const getColorList = async (leotards: string[]) => {
     await driver.get("https://mto.yumiko.com/us_en/alex.html");
 
     // 컬러 옵션 모달을 여는 버튼을 클릭한다.
-    const colorOptionButton = await driver.findElement(
-      By.className("color-option-modal-trigger")
-    );
+    const colorOptionButton = await driver.find_element_by_xpath("//button[normalize-space()='Color Chart']")
     colorOptionButton.click();
 
-    await driver.findElement(By.className("page-wrapper"));
     const fabricHeadings = await driver.findElements(
-      By.className("fabric-heading")
+      By.className("multicolumn__title")
     );
     const fabricContainers = await driver.findElements(
-      By.className("fabric-container")
+      By.className("multicolumn-list")
     );
     const result: FabricType[] = [];
 
     for (let i = 0; i < fabricHeadings.length; i++) {
-      const category = await fabricHeadings[i].getText();
+      const category = await fabricHeadings[i].findElement(By.className("h2")).getText();
+      console.log(category)
       const colors: Color[] = [];
 
       for (let i = 0; i < fabricContainers.length; i++) {
         const fabricName = await fabricContainers[i]
-          .findElement(By.className("fabric-name"))
+          .findElement(By.className("inline-richtext"))
           .getText();
         const fabricImage = await fabricContainers[i]
           .findElement(By.tagName("img"))
