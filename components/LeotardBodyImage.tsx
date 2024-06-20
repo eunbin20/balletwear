@@ -5,10 +5,7 @@ interface IImageComponent {
   leotardSwatchUrl: string;
 }
 
-function LeotardBodyImage({
-  leotardType,
-  leotardSwatchUrl,
-}: IImageComponent) {
+function LeotardBodyImage({ leotardType, leotardSwatchUrl }: IImageComponent) {
   const [filledImage, setFilledImage] = useState("");
 
   useEffect(() => {
@@ -75,7 +72,7 @@ function LeotardBodyImage({
   }
 
   return (
-    <div>
+    <div className="absolute">
       {filledImage && <img src={filledImage} alt="Filled Image" />}
     </div>
   );

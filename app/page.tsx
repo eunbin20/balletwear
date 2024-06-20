@@ -9,9 +9,8 @@ import {
 import colors from "../public/colors.json";
 import leotards from "../public/leotards.json";
 import Image from "next/image";
-import {  useState } from "react";
+import { useState } from "react";
 import PreviewImage from "@/components/PreviewImage";
-
 
 export default function Index() {
   const [leotard, setLeotard] = useState("");
@@ -42,8 +41,8 @@ export default function Index() {
   };
 
   return (
-    <div className="w-[800px] p-4 flex flex-col">
-      <form className="flex gap-1">
+    <div className="p-4 flex flex-col w-full md:w-[800px]">
+      <form className="flex gap-2 flex-col mb-2 md:flex-row ">
         <FormControl fullWidth>
           <InputLabel id="leotard-select-label">레오타드 타입</InputLabel>
           <Select

@@ -4,9 +4,9 @@ import LeotardBodyImage from "@/components/LeotardBodyImage";
 import LeotardTrimImage from "@/components/LeotardTrimImage";
 
 interface IPreviewImage {
-  leotardType: string
+  leotardType: string;
   leotardSwatchUrl: string;
-  trimSwatchUrl: string
+  trimSwatchUrl: string;
 }
 
 const PreviewImage = ({
@@ -15,7 +15,7 @@ const PreviewImage = ({
   trimSwatchUrl,
 }: IPreviewImage) => {
   return (
-    <>
+    <div className="relative">
       <LeotardBodyImage
         leotardType={leotardType}
         leotardSwatchUrl={leotardSwatchUrl}
@@ -24,7 +24,7 @@ const PreviewImage = ({
         leotardType={leotardType}
         trimSwatchUrl={trimSwatchUrl}
       />
-    </>
+    </div>
   );
 };
 

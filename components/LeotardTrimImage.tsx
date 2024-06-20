@@ -5,10 +5,7 @@ interface IImageComponent {
   trimSwatchUrl: string;
 }
 
-function LeotardTrimImage({
-  leotardType,
-  trimSwatchUrl,
-}: IImageComponent) {
+function LeotardTrimImage({ leotardType, trimSwatchUrl }: IImageComponent) {
   const [filledImage, setFilledImage] = useState("");
 
   useEffect(() => {
@@ -75,12 +72,7 @@ function LeotardTrimImage({
   }
 
   return (
-    <div
-      className="absolute"
-      style={{
-        top: "72px",
-      }}
-    >
+    <div className="absolute">
       {filledImage && <img src={filledImage} alt="Filled Image" />}
     </div>
   );
