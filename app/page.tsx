@@ -42,7 +42,7 @@ export default function Index() {
 
   return (
     <div className="p-4 flex flex-col w-full md:w-[800px]">
-      <form className="flex gap-2 flex-col mb-2 md:flex-row ">
+      <form className="flex gap-2 flex-col mb-2">
         <FormControl fullWidth>
           <InputLabel id="leotard-select-label">레오타드 타입</InputLabel>
           <Select
@@ -115,9 +115,13 @@ export default function Index() {
         </FormControl>
       </form>
       <PreviewImage
-        leotardType=""
-        leotardSwatchUrl="Mesh_Tone6.jpeg"
-        trimSwatchUrl="Mesh-Blush.jpeg"
+        leotardType={leotard}
+        leotardSwatchUrl={
+          currentColorList.find((item) => item.title === leotardColor)?.swatch
+        }
+        trimSwatchUrl={
+          currentColorList.find((item) => item.title === trimColor)?.swatch
+        }
       />
     </div>
   );

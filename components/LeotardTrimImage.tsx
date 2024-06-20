@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 interface IImageComponent {
   leotardType: string;
-  trimSwatchUrl: string;
+  trimSwatchUrl?: string;
 }
 
 function LeotardTrimImage({ leotardType, trimSwatchUrl }: IImageComponent) {
@@ -19,7 +19,7 @@ function LeotardTrimImage({ leotardType, trimSwatchUrl }: IImageComponent) {
 
       // Load pattern image B
       const patternImage = new Image();
-      patternImage.src = trimSwatchUrl;
+      patternImage.src = trimSwatchUrl || "";
       await new Promise((resolve) => {
         patternImage.onload = resolve;
       });
@@ -30,7 +30,7 @@ function LeotardTrimImage({ leotardType, trimSwatchUrl }: IImageComponent) {
     };
 
     loadImage();
-  }, []);
+  }, [trimSwatchUrl]);
 
   function fillPattern(
     imageA: HTMLImageElement,

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 interface IImageComponent {
   leotardType: string;
-  leotardSwatchUrl: string;
+  leotardSwatchUrl?: string;
 }
 
 function LeotardBodyImage({ leotardType, leotardSwatchUrl }: IImageComponent) {
@@ -19,7 +19,7 @@ function LeotardBodyImage({ leotardType, leotardSwatchUrl }: IImageComponent) {
 
       // Load pattern image B
       const patternImage = new Image();
-      patternImage.src = leotardSwatchUrl;
+      patternImage.src = leotardSwatchUrl || "";
       await new Promise((resolve) => {
         patternImage.onload = resolve;
       });
@@ -30,7 +30,7 @@ function LeotardBodyImage({ leotardType, leotardSwatchUrl }: IImageComponent) {
     };
 
     loadImage();
-  }, []);
+  }, [leotardSwatchUrl]);
 
   function fillPattern(
     imageA: HTMLImageElement,
