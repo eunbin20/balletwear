@@ -17,6 +17,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "mto.yumiko.com",
       },
+      {
+        protocol: "https",
+        hostname: "yhxujmctnnymvoynohlf.supabase.co",
+      },
     ],
   },
 };

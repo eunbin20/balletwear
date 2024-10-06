@@ -5,8 +5,8 @@ import LeotardTrimImage from "@/components/LeotardTrimImage";
 
 interface IPreviewImage {
   leotardType: string;
-  leotardSwatchUrl: string;
-  trimSwatchUrl: string;
+  leotardSwatchUrl?: string;
+  trimSwatchUrl?: string;
 }
 
 const PreviewImage = ({

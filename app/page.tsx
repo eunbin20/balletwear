@@ -7,10 +7,10 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import colors from "../public/colors.json";
-import leotards from "../public/leotards.json";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PreviewImage from "@/components/PreviewImage";
+import { supabaseClient } from "@/lib/client";
 
 export default function Index() {
   const [leotard, setLeotard] = useState("");
@@ -40,41 +40,37 @@ export default function Index() {
     setLeotardColor(event.target.value as string);
   };
 
+  const [leotards, setLeotards] = useState<any>();
+
+  useEffect(() => {
+    (async () => {
+      let { data: leotard, error } = await supabaseClient
+        .from("leotard")
+        .select("*");
+      setLeotards(leotard);
+    })();
+  });
+
   return (
-    <div className="p-4 flex flex-col w-full md:w-[800px]">
-      <form className="flex gap-2 flex-col mb-2">
-        <FormControl fullWidth>
-          <InputLabel id="leotard-select-label">레오타드 타입</InputLabel>
-          <Select
-            labelId="leotard-select-label"
-            id="leotard-select-label"
-            value={leotard}
-            label="Style"
-            onChange={handleLeotardTypeChange}
-          >
-            {leotards.map((leotard) => (
-              <MenuItem value={leotard} key={leotard}>
-                <div>{leotard}</div>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
-          <InputLabel id="fabric-select-label">재질</InputLabel>
-          <Select
-            labelId="fabric-select-label"
-            id="fabric-select-label"
-            value={fabricType}
-            label="Style"
-            onChange={handleFabricTypeColorChange}
-          >
-            {colors.map((item) => (
-              <MenuItem value={item.fabricType} key={item.fabricType}>
-                <div>{item.fabricType}</div>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+    <div className="p-4 flex flex-col w-full md:w-[1000px]">
+      <form className="flex gap-2 flex-col mb-2 w-full overflow-x-hidden">
+        <div className="overflow-x-scroll">
+          <div className="flex w-fit items-center justify-center gap-4 overflow-x-scroll m-auto pb-0">
+            {leotards?.map((leotard: any) => {
+              return (
+                <div className="w-32 h-56 bg-white border-r-2 mb-5 shadow-md flex flex-col justify-center items-center hover:scale-110">
+                  <Image
+                    src={leotard.image}
+                    alt=""
+                    layout="fixed"
+                    width="400"
+                    height="400"
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
         <FormControl fullWidth>
           <InputLabel id="leotard-color-select-label">몸판 색상</InputLabel>
           <Select
