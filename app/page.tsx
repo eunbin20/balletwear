@@ -17,7 +17,7 @@ export default function Index() {
       // TODO: 에러 처리
       // TODO: 타입 정의
       const { data: leotards } = await supabaseClient
-        .from("leotard")
+        .from("leotards")
         .select("*");
       setLeotards(leotards);
       setSelectedLeotard(leotards?.[0]);
@@ -42,11 +42,15 @@ export default function Index() {
 
   return (
     <div className="flex flex-col w-full relative flex-1 justify-between lg:flex-row">
-      <div className="flex items-center justify-center w-full h-[calc(100vh-412px)] lg:h-[calc(100vh-24px)] p-8">
-        <PreviewImage />
+      <div className="flex items-center justify-center w-full h-[calc(100vh-364px)] lg:h-[calc(100vh-120px)] m-8">
+        <PreviewImage
+          leotard={selectedLeotard}
+          trimColor={selectedTrimColor}
+          bodyColor={selectedBodyColor}
+        />
       </div>
-      <div className="relative w-full lg:w-[514px] h-full lg:h-[calc(100vh-24px)] bg-sand p-8 ">
-        <div className="absolute items-center justify-center top-1/2 -translate-y-1/2 -left-6 w-14 h-14 rounded-full bg-white shadow-xl opacity-70  hidden lg:visible">
+      <div className="relative w-full lg:w-[514px] lg:h-[calc(100vh-48px)] bg-sand p-8">
+        <div className="absolute items-center justify-center top-1/2 -translate-y-1/2 -left-6 w-14 h-14 rounded-full bg-white shadow-xl opacity-70  hidden lg:visible overflow-scroll">
           <Image
             src={arrowIcon}
             alt="arrow icon"
