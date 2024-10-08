@@ -34,24 +34,6 @@
   border-bottom: 0.125rem solid white;
 }
 
-::-webkit-scrollbar {
-  height: 7px;
-}
-
-::-webkit-scrollbar-track {
-  background: none;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: lightgray;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: lightgray;
-}
-
 @keyframes animateIn {
   from {
     opacity: 0;

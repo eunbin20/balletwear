@@ -15,8 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+      ></meta>
       <body
-        className="min-h-screen flex flex-col items-center w-full bg-sand"
+        className="min-h-screen flex flex-col items-center w-full bg-white"
         suppressHydrationWarning={true}
       >
         <Header />

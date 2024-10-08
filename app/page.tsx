@@ -1,124 +1,147 @@
 "use client";
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
-import colors from "../public/colors.json";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import PreviewImage from "@/components/PreviewImage";
 import { supabaseClient } from "@/lib/client";
+import PreviewImage from "@/components/PreviewImage";
+import arrowIcon from "../public/asstes/svgs/icon-arrow-circle.svg";
 
 export default function Index() {
-  const [leotard, setLeotard] = useState("");
-  const [trimColor, setTrimColor] = useState("");
-  const [leotardColor, setLeotardColor] = useState("");
-  const [fabricType, setFabricType] = useState("");
-  const [currentColorList, setCurrentColorList] = useState<
-    { title: string; swatch: string }[]
-  >([]);
-
-  const handleLeotardTypeChange = (event: SelectChangeEvent) => {
-    setLeotard(event.target.value as string);
-  };
-
-  const handleFabricTypeColorChange = (event: SelectChangeEvent) => {
-    const currentValue = event.target.value;
-    setFabricType(currentValue as string);
-    setCurrentColorList(
-      colors.filter((item) => item.fabricType === currentValue)[0].colors
-    );
-  };
-
-  const handleTrimColorChange = (event: SelectChangeEvent) => {
-    setTrimColor(event.target.value as string);
-  };
-  const handleLeotardColorChange = (event: SelectChangeEvent) => {
-    setLeotardColor(event.target.value as string);
-  };
-
+  const [colors, setColors] = useState<any>();
   const [leotards, setLeotards] = useState<any>();
+  const [selectedLeotard, setSelectedLeotard] = useState<any>();
+  const [selectedTrimColor, setSelectedTrimColor] = useState<any>();
+  const [selectedBodyColor, setSelectedBodyColor] = useState<any>();
 
   useEffect(() => {
     (async () => {
-      let { data: leotard, error } = await supabaseClient
+      // TODO: 에러 처리
+      // TODO: 타입 정의
+      const { data: leotards } = await supabaseClient
         .from("leotard")
         .select("*");
-      setLeotards(leotard);
+      setLeotards(leotards);
+      setSelectedLeotard(leotards?.[0]);
+      const { data: colors } = await supabaseClient.from("colors").select("*");
+      setColors(colors);
+      setSelectedTrimColor(colors?.[0]);
+      setSelectedBodyColor(colors?.[0]);
     })();
-  });
+  }, []);
+
+  const handleLeotardItemClick = (leotard: any) => {
+    setSelectedLeotard(leotard);
+  };
+
+  const handleTrimColorItemClick = (color: any) => {
+    setSelectedTrimColor(color);
+  };
+
+  const handleBodyColorItemClick = (color: any) => {
+    setSelectedBodyColor(color);
+  };
 
   return (
-    <div className="p-4 flex flex-col w-full md:w-[1000px]">
-      <form className="flex gap-2 flex-col mb-2 w-full overflow-x-hidden">
-        <div className="overflow-x-scroll">
-          <div className="flex w-fit items-center justify-center gap-4 overflow-x-scroll m-auto pb-0">
-            {leotards?.map((leotard: any) => {
+    <div className="flex flex-col w-full relative flex-1 justify-between lg:flex-row">
+      <div className="flex items-center justify-center w-full h-[calc(100vh-412px)] lg:h-[calc(100vh-24px)] p-8">
+        <PreviewImage />
+      </div>
+      <div className="relative w-full lg:w-[514px] h-full lg:h-[calc(100vh-24px)] bg-sand p-8 ">
+        <div className="absolute items-center justify-center top-1/2 -translate-y-1/2 -left-6 w-14 h-14 rounded-full bg-white shadow-xl opacity-70  hidden lg:visible">
+          <Image
+            src={arrowIcon}
+            alt="arrow icon"
+            className="rotate-270 w-9 h-9"
+          />
+        </div>
+        <div className="pb-4">
+          <div className="flex items-end gap-2 mb-4">
+            <h1 className="font-semibold text-xl">레오타드</h1>
+          </div>
+          <div className="overflow-x-scroll p-4 -m-4">
+            <div className="flex w-fit items-center justify-center gap-4 m-auto pb-3">
+              {leotards?.map((leotard: any) => {
+                return (
+                  <div
+                    key={leotard.name}
+                    className={`w-40 bg-white shadow-md flex flex-col justify-center items-center hover:scale-105 rounded-2xl ${
+                      selectedLeotard?.id === leotard.id &&
+                      "border-2 border-gray-500"
+                    }`}
+                    onClick={() => handleLeotardItemClick(leotard)}
+                  >
+                    <div className="relative w-28 h-44">
+                      <Image
+                        src={leotard.image}
+                        alt={leotard.name}
+                        fill
+                        objectFit="cover"
+                        className="p-2"
+                      />
+                    </div>
+                    <div>{leotard.name}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+        <div className="pb-6">
+          <div className="flex items-end gap-2 mb-3">
+            <h1 className="font-semibold text-xl ">몸판 색상</h1>
+          </div>
+          <div className="overflow-x-scroll">
+            <div className="flex w-fit items-center gap-2 pb-0 flex-wrap">
+              {colors?.map((color: any, index: any) => {
+                return (
+                  <div
+                    key={index}
+                    className={`group/color w-6 h-6 bg-white border-r-2 shadow-md flex flex-col justify-center items-center hover:scale-110 rounded-sm ${
+                      selectedBodyColor?.id === color.id &&
+                      "border-2 border-gray-800"
+                    }`}
+                    onClick={() => handleBodyColorItemClick(color)}
+                  >
+                    <Image
+                      src={color.image}
+                      alt=""
+                      layout="fixed"
+                      width="24"
+                      height="24"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+        <div className="pb-4">
+          <div className="flex items-end gap-2 mb-3">
+            <h1 className="font-semibold text-xl">트림 색상</h1>
+          </div>
+          <div className="flex w-fit items-center gap-2 pb-0 flex-wrap">
+            {colors?.map((color: any, index: any) => {
               return (
-                <div className="w-32 h-56 bg-white border-r-2 mb-5 shadow-md flex flex-col justify-center items-center hover:scale-110">
+                <div
+                  key={index}
+                  className={`group/color w-6 h-6 bg-white border-r-2 shadow-md flex flex-col justify-center items-center hover:scale-110 rounded-sm ${
+                    selectedTrimColor?.id === color.id &&
+                    "border-2 border-gray-800"
+                  }`}
+                  onClick={() => handleTrimColorItemClick(color)}
+                >
                   <Image
-                    src={leotard.image}
+                    src={color.image}
                     alt=""
                     layout="fixed"
-                    width="400"
-                    height="400"
+                    width="24"
+                    height="24"
                   />
                 </div>
               );
             })}
           </div>
         </div>
-        <FormControl fullWidth>
-          <InputLabel id="leotard-color-select-label">몸판 색상</InputLabel>
-          <Select
-            labelId="leotard-color-select-label"
-            id="leotard-color-select-label"
-            value={leotardColor}
-            label="Style"
-            onChange={handleLeotardColorChange}
-          >
-            {currentColorList.map((color) => (
-              <MenuItem value={color.title} key={color.title + "leotard"}>
-                <div>
-                  <Image src={color.swatch} alt="" width={20} height={20} />
-                  {color.title}
-                </div>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
-          <InputLabel id="trim-color-select-label">트림 색상</InputLabel>
-          <Select
-            labelId="trim-color-select-label"
-            id="trim-color-select-label"
-            value={trimColor}
-            label="Style"
-            onChange={handleTrimColorChange}
-          >
-            {currentColorList.map((color) => (
-              <MenuItem value={color.title} key={color.title + "trim"}>
-                <div>
-                  <Image src={color.swatch} alt="" width={20} height={20} />
-                  {color.title}
-                </div>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </form>
-      <PreviewImage
-        leotardType={leotard}
-        leotardSwatchUrl={
-          currentColorList.find((item) => item.title === leotardColor)?.swatch
-        }
-        trimSwatchUrl={
-          currentColorList.find((item) => item.title === trimColor)?.swatch
-        }
-      />
+      </div>
     </div>
   );
 }
