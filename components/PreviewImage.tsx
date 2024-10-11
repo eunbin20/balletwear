@@ -18,7 +18,7 @@ interface IPreviewImage {
 const PreviewImage = ({ leotard, trimColor, bodyColor }: IPreviewImage) => {
   return (
     <div className="w-full flex items-center justify-center">
-      <div className="rounded-xl relative w-[300px] h-[400px] lg:w-[400px] lg:h-[600px]">
+      <div className="rounded-xl relative w-3/4 h-[300px] lg:w-[400px] lg:h-[600px]">
         <PartialImage image={leotard?.bodyImage} colorInfo={bodyColor} />
         <PartialImage image={leotard?.trimImage} colorInfo={trimColor} />
         {leotard?.optionImage && <PartialImage image={leotard?.optionImage} />}

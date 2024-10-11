@@ -38,8 +38,7 @@ const ColorSelection = ({
               <div
                 key={color.id}
                 className={`border-2 gap-1 p-1 group/color w-fit h-8 bg-white border-r-2 shadow-md flex justify-center items-center hover:scale-110 rounded-lg ${
-                  selectedBodyColor?.id === color.id &&
-                  "border-2 border-gray-500"
+                  selectedBodyColor?.id === color.id && "border-gray-500"
                 } `}
                 onClick={() => onChange(color)}
               >

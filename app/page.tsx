@@ -35,9 +35,9 @@ export default function Index() {
 
   return (
     <div className="flex flex-col w-full relative flex-1 justify-between lg:flex-row text-gray-800">
-      <div className="relative flex items-center justify-center w-full h-[calc(100vh-364px)] lg:h-[calc(100vh-120px)] p-8">
+      <div className="relative flex items-center justify-center w-full h-[calc(100vh-264px)] lg:h-[calc(100vh-120px)] p-8">
         <div className="absolute top-2 left-4 flex items-end gap-2">
-          <div className="text-gray-800 font-bold text-5xl font-sans mr-2">
+          <div className="text-gray-800 font-bold text-3xl lg:text-5xl font-sans mr-2">
             {selectedLeotard?.name}
           </div>
           <div
@@ -73,7 +73,7 @@ export default function Index() {
           bodyColor={selectedBodyColor}
         />
       </div>
-      <div className="overflow-y-scroll relative w-full lg:w-min-[450px] lg:h-[calc(100vh-48px)] bg-sand p-4 lg:p-8 h-96">
+      <div className="overflow-y-scroll relative w-full lg:w-min-[450px] lg:h-[calc(100vh-48px)] bg-sand p-4 lg:p-8 h-[calc(100vh-48px)]">
         <div className="absolute items-center justify-center top-1/2 -translate-y-1/2 -left-6 w-14 h-14 rounded-full bg-white shadow-xl opacity-70  hidden lg:visible overflow-scroll">
           <Image
             src={arrowCircleIcon}
