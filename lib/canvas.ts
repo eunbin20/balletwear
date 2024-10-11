@@ -2,7 +2,8 @@
 export const fillImageWithPattern = (
   imageA: HTMLImageElement,
   patternImage: HTMLImageElement,
-  applyShading?: boolean
+  applyShading?: boolean,
+  type?: string
 ) => {
   const canvas = document.createElement("canvas") as HTMLCanvasElement;
   const ctx = canvas.getContext("2d");
@@ -22,8 +23,7 @@ export const fillImageWithPattern = (
 
   const patternCanvas = document.createElement("canvas") as HTMLCanvasElement;
   const patternCtx = patternCanvas.getContext("2d");
-
-  const scale = 0.05;
+  const scale = type === "crushed velvet" || type === "velvet" ? 1 : 0.05;
   patternCanvas.width = patternImage.width * scale;
   patternCanvas.height = patternImage.height * scale;
 

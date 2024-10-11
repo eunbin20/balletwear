@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 interface IImageComponent {
   leotardSwatchUrl?: {
     image: string;
+    type: {
+      name: string;
+    };
   };
   leotard: {
     id: string;
@@ -22,6 +25,7 @@ function LeotardBodyImage({ leotard, leotardSwatchUrl }: IImageComponent) {
       const imageA = new Image();
       imageA.src = leotard?.bodyImage || "";
       imageA.crossOrigin = "Anonymous";
+
       await new Promise((resolve) => {
         imageA.onload = resolve;
       });
@@ -34,7 +38,12 @@ function LeotardBodyImage({ leotard, leotardSwatchUrl }: IImageComponent) {
         patternImage.onload = resolve;
       });
 
-      const filledDataURL = fillImageWithPattern(imageA, patternImage, true);
+      const filledDataURL = fillImageWithPattern(
+        imageA,
+        patternImage,
+        true,
+        leotardSwatchUrl?.type?.name
+      );
       setFilledImage(filledDataURL);
     };
 

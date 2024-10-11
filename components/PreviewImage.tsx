@@ -1,15 +1,15 @@
 import Link from "next/link";
 import React from "react";
-import LeotardBodyImage from "@/components/LeotardBodyImage";
-import LeotardTrimImage from "@/components/LeotardTrimImage";
+import PartialImage from "./PartialImage";
 
 interface IPreviewImage {
-  leotard: {
+  leotard?: {
     id: string;
     name: string;
     image?: string;
     trimImage?: string;
     bodyImage?: string;
+    optionImage?: string;
   };
   trimColor?: any;
   bodyColor?: any;
@@ -19,8 +19,9 @@ const PreviewImage = ({ leotard, trimColor, bodyColor }: IPreviewImage) => {
   return (
     <div className="w-full flex items-center justify-center">
       <div className="rounded-xl relative w-[400px] h-[600px]">
-        <LeotardBodyImage leotard={leotard} leotardSwatchUrl={bodyColor} />
-        <LeotardTrimImage leotard={leotard} trimSwatchUrl={trimColor} />
+        <PartialImage image={leotard?.bodyImage} colorInfo={bodyColor} />
+        <PartialImage image={leotard?.trimImage} colorInfo={trimColor} />
+        {leotard?.optionImage && <PartialImage image={leotard?.optionImage} />}
       </div>
     </div>
   );
