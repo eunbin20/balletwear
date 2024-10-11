@@ -2,6 +2,7 @@ import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/react";
 import { Header } from "@/components/Header";
+import Script from "next/script";
 
 export const metadata = {
   title: "Create Next App",
@@ -19,6 +20,22 @@ export default function RootLayout({
         name="viewport"
         content="width=device-width, initial-scale=1.0"
       ></meta>
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-3P1X85C49Y"
+      ></script>
+      <Script
+        id="tictok-pixel"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-3P1X85C49Y');
+          `,
+        }}
+      />
       <body
         className="min-h-screen flex flex-col items-center w-full bg-white"
         suppressHydrationWarning={true}

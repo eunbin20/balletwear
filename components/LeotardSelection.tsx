@@ -39,11 +39,12 @@ const LeotardSelection = ({
       >
         <div className="flex w-fit items-center justify-center gap-4 m-auto pb-3">
           {leotards?.map((leotard: any) => {
+            console.log(selectedLeotard.name);
             return (
               <div
                 key={leotard.name}
-                className={`w-40 bg-white shadow-md flex flex-col justify-center items-center hover:scale-105 rounded-2xl ${
-                  selectedLeotard?.id === leotard.id && " border-gray-500"
+                className={`w-40 bg-white shadow-md flex flex-col justify-center items-center hover:scale-105 rounded-2xl border ${
+                  selectedLeotard?.id === leotard.id && "border-gray-500"
                 }`}
                 onClick={() => handleLeotardItemClick(leotard)}
               >
