@@ -1,24 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 
+interface a {
+  image: string;
+  type: {
+    name: string;
+  };
+}
+
 interface ICanvas {
-  bodyImageInfo?: {
-    image: string;
-    type: {
-      name: string;
-    };
-  };
-  trimImageInfo?: {
-    image: string;
-    type: {
-      name: string;
-    };
-  };
-  optionImageInfo?: {
-    image: string;
-    type: {
-      name: string;
-    };
-  };
+  bodyImageInfo?: a;
+  trimImageInfo?: a;
+  optionImageInfo?: a;
 }
 
 const Canvas = ({ bodyImageInfo, trimImageInfo, optionImageInfo }: ICanvas) => {
