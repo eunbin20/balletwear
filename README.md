@@ -13,15 +13,26 @@
   <a href="https://balletbin.com">https://balletbin.com</a>
 </p>
 
-<h5 style="text-align: center; font-weight: 400;">
-
-취미로 발레를 하며 자연스럽게 발레복에도 관심이 생겼습니다.
 <br/>
-그러다 유명한 발레복 브랜드인 Yumiko에서 다양한 색상, 소재를 소비자가 직접 조합하여 주문할 수 있게 해주는 커스텀 오더 서비스를 알게 되었습니다.
 
-**그러나, 옷의 디자인과 색상을 셀렉 박스로 선택만 가능할 뿐, <br/> 이 색상들의 조합이 실제로 어떤 모습일지 즉시 확인할 수 없다는 불편함을 느꼈어요.**
+<p align=center>
+취미로 발레를 하며 자연스럽게 발레복에도 관심이 생겼습니다. 
+</p>
+<br/>
+<p align=center>
+그러다 유명한 발레복 브랜드인
+<a href="https://www.yumiko.com/">Yumiko</a>
+에서 다양한 색상, 소재를 소비자가 직접 조합하여 주문할 수 있게 해주는 커스텀 오더 서비스를 알게 되었습니다.
+</p>
+<br/>
+<p align=center>
+그러나, 옷의 디자인과 색상을 셀렉 박스로 선택만 가능할 뿐, 
+</p>
+<br/>
 
-</h5>
+<h4 align=center>이 색상들의 조합이 실제로 어떤 모습일지 즉시 확인할 수 없다는 불편함을 느꼈어요.</h4>
+
+<br/>
 
 <div align=center>
   <img
@@ -32,15 +43,18 @@
 
 <br/>
 
-<h4 align=center style="text-align: center; font-size: 1.1em;">저는 이러한 경험에서 영감을 받아, <br/> 사용자가 선택한 조합을 실시간으로 시각적으로 확인할 수 있는 "Yumiko Simulator"를 기획하게 되었습니다.</h4>
+<h4 align=center style="text-align: center; font-size: 1.1em;">저는 이러한 경험에서 영감을 받아, <br/> 사용자가 선택한 디자인 조합을 실시간으로 시각적으로 확인할 수 있는 "Yumiko Simulator"를 기획하게 되었습니다.</h4>
 
 <br/>
 
 ## 기능 설명
 
-> 먼저 레오타드 타입을 선택하고, 그 후 몸판 색상과 트림 색상을 자유롭게 설정합니다.
-> <br/>
-> 왼쪽 미리보기 화면에서 선택한 옵션이 적용된 모습을 **실시간으로 확인**할 수 있습니다.
+<p align=center style="text-align: center; font-weight: 300;">
+먼저 레오타드 타입을 선택하고, 그 후 몸판 색상과 트림 색상을 자유롭게 설정합니다.<br/>
+
+왼쪽 미리보기 화면에서 선택한 옵션이 적용된 모습을 **실시간으로 확인**할 수 있습니다.
+
+<h4>
 
 <div align=center>
   <img
