@@ -41,7 +41,7 @@ export default function Index() {
             {selectedLeotard?.name}
           </div>
           <div
-            className={`border-2 gap-1 p-1 group/color w-fit h-8 bg-white border-r-2 shadow-md flex justify-center items-center hover:scale-110 rounded-lg`}
+            className={`border-2 gap-1 p-1 group/color w-fit h-8 bg-white border-r-2 shadow-md flex justify-center items-center rounded-lg`}
           >
             <Image
               src={selectedBodyColor?.image}
@@ -54,7 +54,7 @@ export default function Index() {
             <p className="text-xs">{selectedBodyColor?.name}</p>
           </div>
           <div
-            className={`border-2 gap-1 p-1 group/color w-fit h-8 bg-white border-r-2 shadow-md flex justify-center items-center hover:scale-110 rounded-lg `}
+            className={`border-2 gap-1 p-1 group/color w-fit h-8 bg-white border-r-2 shadow-md flex justify-center items-center rounded-lg`}
           >
             <Image
               src={selectedTrimColor?.image}
