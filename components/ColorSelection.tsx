@@ -16,14 +16,14 @@ const ColorSelection = ({
   selectedBodyColor,
   onChange,
 }: IColorSelection) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const handleHeaderClick = () => {
     setIsExpanded((prev) => !prev);
   };
 
   return (
-    <div className="pb-6">
+    <div className="pb-8">
       <div
         className="flex items-end gap-2 mb-3 justify-between cursor-pointer"
         onClick={handleHeaderClick}
