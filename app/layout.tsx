@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="ko">
       <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+	      content="width=device-width, initial-scale=1, viewport-fit=cover"
       ></meta>
       <script
         async
@@ -37,7 +37,7 @@ export default function RootLayout({
         }}
       />
       <body
-        className="min-h-screen flex flex-col items-center w-full bg-white"
+        className="min-h-real-screen h-real-screen flex flex-col items-center w-full bg-white overflow-hidden"
         suppressHydrationWarning={true}
       >
         <Header />

@@ -13,6 +13,10 @@ interface IPartialImage {
 
 const PartialImage = ({ image, colorInfo }: IPartialImage) => {
   const [filledImage, setFilledImage] = useState("");
+  const [imageSize, setImageSize] = useState({
+    width: 300,
+    height: 400
+  })
 
   useEffect(() => {
     const loadImage = async () => {
@@ -49,9 +53,23 @@ const PartialImage = ({ image, colorInfo }: IPartialImage) => {
     loadImage();
   }, [colorInfo, image]);
 
+
+  useEffect(() => {
+    if (window.innerWidth > 1024) return;
+
+    const vh = window.innerHeight * 0.01;
+    const screenHeight = vh * 100;
+    const imageHeight = screenHeight - 380;
+
+    setImageSize({
+      width: imageHeight * 3/4,
+      height: imageHeight
+    })
+  }, []);
+
   return (
-    <div className="absolute">
-      {filledImage && <img src={filledImage} alt="Filled Image" />}
+    <div className="absolute top-20 lg:top-1/2 lg:-translate-y-1/2 ">
+      {filledImage && <img src={filledImage} alt="Filled Image" width={imageSize.width} height={imageSize.height}/>}
     </div>
   );
 };
