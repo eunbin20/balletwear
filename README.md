@@ -5,7 +5,7 @@
     width="500">
 </div>
 
-<h1 align=center> Yumiko Simulator 🩰 </h1>
+<h1 align=center> 🩰 Yumiko Simulator 🩰 </h1>
 
 <h4 align=center>원하는 대로 발레복 색상과 디자인을 바꿔볼 수 있는 디자인 시뮬레이터</h4>
 <br/>
