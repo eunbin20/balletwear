@@ -23,6 +23,22 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // Basic redirect
+      {
+        source: '/',
+        destination: '/yumiko-simulator',
+        permanent: false,
+      },
+      // Wildcard path matching
+      {
+        source: '/blog/:slug',
+        destination: '/news/:slug',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 module.exports = nextConfig;
